@@ -1,1 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WebAR Hibiscus</title>
 
+  <!-- A-Frame & AR.js -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/ar.js/aframe/build/aframe-ar.min.js"></script>
+  <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+
+<body style="margin: 0; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <button id="startAR" style="padding: 15px 30px; font-size: 16px; cursor: pointer;">
+    Start AR Experience
+  </button>
+
+  <div id="arContainer" style="display: none; width: 100%; height: 100%;">
+    <a-scene embedded arjs="sourceType: webcam;">
+      <!-- Assets -->
+      <a-assets>
+        <a-asset-item id="humancell" src="human_cell.glb"></a-asset-item>
+        <a-asset-item id="hibbModel" src="hibi2.glb"></a-asset-item>
+        <a-asset-item id="hibbbModel" src="5d.glb"></a-asset-item>
+      </a-assets>
+
+      <!-- Hibb1 -->
+<!--       <a-entity id="hib1"
+                gltf-model="#hibModel"
+                position="0 0 -40"
+                scale="5 5 5"
+                visible="true"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000">
+      </a-entity> -->
+
+      <!-- Hibb2 -->
+<!--       <a-entity id="hib2"
+                gltf-model="#hibbModel"
+                animation-mixer
+                position="0 15 -70"
+                scale="0.5 0.5 0.5"
+                visible="false"
+                gesture-controls>
+      </a-entity> -->
+
+      <!-- Hibb3 -->
+      <a-entity id="hib3"
+                gltf-model="#humancell"
+                position="0 0 -60"
+                scale="50 50 50"
+                visible="true"
+                class="clickable"
+                label-on-click
+                gesture-controls>
+      </a-entity>
+
+      <!-- Quiz Button -->
+      <a-entity id="quizButton"
+                geometry="primitive: plane; height: 0.4; width: 1.5"
+                material="color: #28a745; opacity: 0.9"
+                position="0 1.5 -3"
+                text="value: Take the Quiz; align: center; color: white; width: 4"
+                visible="false"
+                class="clickable"
+                onclick="showQuiz()">
+      </a-entity>
+
+      <!-- Camera with raycaster & cursor -->
+      <a-camera id="mainCamera" position="1 5 5" rotation="-30 -45 0" look-controls>
+        <a-cursor></a-cursor>
+      </a-camera>
+    </a-scene>
+    <!-- Quiz UI -->
+    <div id="quiz-container" style="display: none; position: absolute; top: 10%; left: 5%; background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 400px; z-index: 1000;">
+      <div style="text-align: right;">
+        <button onclick="closeQuiz()" style="font-size: 18px; background: none; color: white; border: none; cursor: pointer;">&times;</button>
+      </div>
+      <h3>Solar System Quiz</h3>
+      <p id="quiz-question"></p>
+      <div id="quiz-options"></div>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <script>
+    function introSpeak(text, callback) {
+      let utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.rate = 1;
+      utterance.onend = callback;
+      speechSynthesis.speak(utterance);
+    }
+
+    AFRAME.registerComponent("label-on-click", {
+      init: function () {
+        const el = this.el;
+    
+        el.addEventListener("model-loaded", () => {
+          const flower = el.getObject3D("mesh");
+    
+          if (!flower) return;
+    
+          flower.traverse((node) => {
+            if (node.isMesh && node.name) {
+              const partName = node.name;
+    
+              // Create an invisible clickable box over each part
+              const clickArea = document.createElement("a-entity");
+              clickArea.setAttribute("geometry", "primitive: box; height: 0.05; width: 0.05; depth: 0.05");
+              clickArea.setAttribute("material", "opacity: 0; transparent: true;");
+              
+              // Adjust position slightly up for better click registration
+              const worldPos = new THREE.Vector3();
+              node.getWorldPosition(worldPos);
+              clickArea.setAttribute("position", `${worldPos.x} ${worldPos.y} ${worldPos.z}`);
+    
+              clickArea.setAttribute("class", "clickable");
+    
+              clickArea.addEventListener("click", () => {
+                showLabel(partName, worldPos);
+              });
+    
+              el.sceneEl.appendChild(clickArea);
+            }
+          });
+        });
+    
+        function showLabel(name, pos) {
+          // Avoid duplicate labels
+          if (document.getElementById("label-" + name)) return;
+    
+          const label = document.createElement("a-entity");
+          label.setAttribute("id", "label-" + name);
+          label.setAttribute("text", {
+            value: name.replaceAll("_", " "), // Optional formatting
+            align: "center",
+            color: "#FFD700",
+            width: 2
+          });
+    
+          // Show label slightly above the part
+          label.setAttribute("position", {
+            x: pos.x,
+            y: pos.y + 0.15,
+            z: pos.z,
+          });
+    
+          // Scale animation
+          label.setAttribute("scale", "0 0 0");
+          label.setAttribute("animation", {
+            property: "scale",
+            to: "1 1 1",
+            dur: 500,
+            easing: "easeOutElastic"
+          });
+    
+          el.sceneEl.appendChild(label);
+        }
+      }
+    });
+
+    document.getElementById('startAR').addEventListener('click', async function () {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (stream) {
+          document.getElementById('startAR').style.display = 'none';
+          document.getElementById('arContainer').style.display = 'block';
+          const h3 = document.querySelector("#humancell");
+          const camera = document.querySelector("#mainCamera");
+
+          introSpeak("Welcome to explore the parts of humancell", () => {
+                  h3.setAttribute("visible", "true");
+
+                  // Show quiz button after hibiscus parts
+                  setTimeout(() => {
+                    document.querySelector("#quizButton").setAttribute("visible", "true");
+                  }, 3000);
+                }, 5000); // Show hib3 for 5 seconds
+          });
+        }
+      } catch (err) {
+        alert("Camera permission denied. Please allow access to use AR.");
+      }
+    });
+
+    const quizData = [
+      { question: "Which part is male reproductive?", options: ["Pistil", "Sepal", "Stamen"], answer: "Stamen" },
+      { question: "Which part is female reproductive?", options: ["Filament", "Stamen", "Pistil"], answer: "Pistil" },
+      { question: "Which part attracts the pollen grains?", options: ["Stamen", "Anther", "Petal"], answer: "Petal" },
+      { question: "Which part protects the buds?", options: ["Sepal", "Petal", "Stamen"], answer: "Sepal" }
+    ];
+
+    let currentQuestion = 0;
+
+    function showQuiz() {
+      document.getElementById("quiz-container").style.display = "block";
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById("quiz-question").innerText = q.question;
+
+      let optionsHTML = "";
+      q.options.forEach(opt => {
+        optionsHTML += `<button onclick="checkAnswer('${opt}')" style="margin: 5px;">${opt}</button>`;
+      });
+      document.getElementById("quiz-options").innerHTML = optionsHTML;
+    }
+
+    function checkAnswer(selected) {
+      const correct = quizData[currentQuestion].answer;
+      if (selected === correct) {
+        alert("✅ Correct!");
+      } else {
+        alert("❌ Oops! The correct answer is: " + correct);
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        alert("🎉 Quiz Completed!");
+        document.getElementById("quiz-container").style.display = "none";
+        currentQuestion = 0;
+      }
+    }
+
+    function closeQuiz() {
+      document.getElementById("quiz-container").style.display = "none";
+    }
+  </script>
+</body>
+</html>
