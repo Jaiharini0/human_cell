@@ -21,38 +21,15 @@
       <!-- Assets -->
       <a-assets>
         <a-asset-item id="humancell" src="human_cell.glb"></a-asset-item>
-        <a-asset-item id="hibbModel" src="hibi2.glb"></a-asset-item>
-        <a-asset-item id="hibbbModel" src="5d.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Hibb1 -->
-<!--       <a-entity id="hib1"
-                gltf-model="#hibModel"
-                position="0 0 -40"
-                scale="5 5 5"
-                visible="true"
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000">
-      </a-entity> -->
-
-      <!-- Hibb2 -->
-<!--       <a-entity id="hib2"
-                gltf-model="#hibbModel"
-                animation-mixer
-                position="0 15 -70"
-                scale="0.5 0.5 0.5"
-                visible="false"
-                gesture-controls>
-      </a-entity> -->
-
-      <!-- Hibb3 -->
+      <!-- Humancell -->
       <a-entity id="hib3"
                 gltf-model="#humancell"
                 position="0 0 -60"
-                scale="50 50 50"
+                scale="5 5 5"
                 visible="true"
-                class="clickable"
                 animation-mixer
-                label-on-click
                 gesture-controls>
       </a-entity>
 
@@ -92,75 +69,6 @@
       utterance.onend = callback;
       speechSynthesis.speak(utterance);
     }
-
-    AFRAME.registerComponent("label-on-click", {
-      init: function () {
-        const el = this.el;
-    
-        el.addEventListener("model-loaded", () => {
-          const flower = el.getObject3D("mesh");
-    
-          if (!flower) return;
-    
-          flower.traverse((node) => {
-            if (node.isMesh && node.name) {
-              const partName = node.name;
-    
-              // Create an invisible clickable box over each part
-              const clickArea = document.createElement("a-entity");
-              clickArea.setAttribute("geometry", "primitive: box; height: 0.05; width: 0.05; depth: 0.05");
-              clickArea.setAttribute("material", "opacity: 0; transparent: true;");
-              
-              // Adjust position slightly up for better click registration
-              const worldPos = new THREE.Vector3();
-              node.getWorldPosition(worldPos);
-              clickArea.setAttribute("position", `${worldPos.x} ${worldPos.y} ${worldPos.z}`);
-    
-              clickArea.setAttribute("class", "clickable");
-    
-              clickArea.addEventListener("click", () => {
-                showLabel(partName, worldPos);
-              });
-    
-              el.sceneEl.appendChild(clickArea);
-            }
-          });
-        });
-    
-        function showLabel(name, pos) {
-          // Avoid duplicate labels
-          if (document.getElementById("label-" + name)) return;
-    
-          const label = document.createElement("a-entity");
-          label.setAttribute("id", "label-" + name);
-          label.setAttribute("text", {
-            value: name.replaceAll("_", " "), // Optional formatting
-            align: "center",
-            color: "#FFD700",
-            width: 2
-          });
-    
-          // Show label slightly above the part
-          label.setAttribute("position", {
-            x: pos.x,
-            y: pos.y + 0.15,
-            z: pos.z,
-          });
-    
-          // Scale animation
-          label.setAttribute("scale", "0 0 0");
-          label.setAttribute("animation", {
-            property: "scale",
-            to: "1 1 1",
-            dur: 500,
-            easing: "easeOutElastic"
-          });
-    
-          el.sceneEl.appendChild(label);
-        }
-      }
-    });
-
     document.getElementById('startAR').addEventListener('click', async function () {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -171,13 +79,10 @@
           const camera = document.querySelector("#mainCamera");
 
           introSpeak("Welcome to explore the parts of humancell", () => {
-                  h3.setAttribute("visible", "true");
-
-                  // Show quiz button after hibiscus parts
+                // Show quiz button after hibiscus parts
                   setTimeout(() => {
                     document.querySelector("#quizButton").setAttribute("visible", "true");
-                  }, 3000);
-                }, 5000); // Show hib3 for 5 seconds
+                }); // Show hib3 for 5 seconds
           });
         }
       } catch (err) {
