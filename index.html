@@ -20,29 +20,37 @@
     <a-scene embedded arjs="sourceType: webcam;">
       <!-- Assets -->
       <a-assets>
-        <a-asset-item id="humancell" src="animal_cell.gltf"></a-asset-item>
+        <a-asset-item id="h_anatomy" src="human_anatomy.glb"></a-asset-item>
+        <a-asset-item id="h_skin" src="anatomy_of_the_skin.glb"></a-asset-item>
+        <a-asset-item id="h_cell" src="animal_cell.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Humancell -->
-      <a-entity id="hib3"
-                gltf-model="#humancell"
-                position="0 0 -60"
-                scale="5 5 5"
-                visible="true"
-                animation-mixer
-                gesture-controls>
+      <!-- Human Anatomy Model -->
+      <a-entity id="anatomy"  
+        visible="true"
+        gltf-model="#h_anatomy"
+        position="0 0 -1"
+        scale="5 5 5"
+        animation="property: rotation; to: 0 360 0; dur: 10000">
       </a-entity>
 
-      <!-- Marker for Annotation 1 (example) -->
-      <a-sphere 
-        id="ann1" 
-        position="-0.4446245077 0.403111572 0.388603308" 
-        radius="0.02" 
-        color="orange"
-        class="clickable"
-        animation__mouseenter="property: scale; to: 1.5 1.5 1.5; startEvents: mouseenter; dur: 300"
-        animation__mouseleave="property: scale; to: 1 1 1; startEvents: mouseleave; dur: 300">
-      </a-sphere>
+      <!-- Skin Layers Model -->
+      <a-entity id="skin" 
+        position="0 0 -1" 
+        scale="5 5 5"
+        visible="false"
+        gltf-model="#h_skin"
+        animation-mixer>
+      </a-entity>
+
+      <!-- Animal Cell Model -->
+      <a-entity id="cell" 
+        position="0 0 -1" 
+        scale="5 5 5"
+        visible="false"
+        gltf-model="#h_cell"
+        animation-mixer>
+      </a-entity>
 
       <!-- Quiz Button -->
       <a-entity id="quizButton"
@@ -73,15 +81,7 @@
   </div>
 
   <script>
-    document.querySelectorAll('.clickable').forEach((el) => {
-        el.addEventListener('click', () => {
-          const msg = "This part is the nucleus. It controls all activities in the cell.";
-          const utterance = new SpeechSynthesisUtterance(msg);
-          utterance.lang = 'en-US';
-          speechSynthesis.speak(utterance);
-        });
-      });
-    function introSpeak(text, callback) {
+      function introSpeak(text, callback) {
       let utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "en-US";
       utterance.rate = 1;
@@ -94,15 +94,36 @@
         if (stream) {
           document.getElementById('startAR').style.display = 'none';
           document.getElementById('arContainer').style.display = 'block';
-          const h3 = document.querySelector("#humancell");
+          const h1 = document.querySelector("#anatomy");
+          const h2 = document.querySelector("#skin");
+          const h3 = document.querySelector("#cell");
           const camera = document.querySelector("#mainCamera");
 
-          introSpeak("Welcome to explore the parts of humancell", () => {
+          introSpeak("Welcome to the amazing journey inside the human body!, Everything you see around you—from your hands to your heart—is made up of tiny living units called cells. These cells join together to form tissues, build organs, and create the marvelous machine that is YOU!", () => {
                 // Show quiz button after hibiscus parts
+                  h1.setAttribute("visible", "true");
                   setTimeout(() => {
-                    document.querySelector("#quizButton").setAttribute("visible", "true");
-                }); // Show hib3 for 5 seconds
-          });
+                    camera.setAttribute("animation", {
+                      property: "position",
+                      to: "1 5 5",
+                      // dur: 5000,
+                      easing: "easeInOutQuad"
+                    });
+                      
+                      h1.setAttribute("visible", "false");
+                      h2.setAttribute("visible", "true");
+      
+                      setTimeout(() => {
+                        h2.setAttribute("visible", "false");
+                        h3.setAttribute("visible", "true");
+      
+                        // Show quiz button after hibiscus parts
+                        setTimeout(() => {
+                          document.querySelector("#quizButton").setAttribute("visible", "true");
+                        }, 3000);
+                      }, 5000); // Show hib3 for 5 seconds
+                    // Show hib2 for 5 seconds
+                  }, 1000);
         }
       } catch (err) {
         alert("Camera permission denied. Please allow access to use AR.");
