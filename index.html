@@ -35,7 +35,7 @@
         animation-mixer>
         <!-- Heart organ -->
         <a-entity id="heart-group" position="-0.5 0 -2">
-          <a-entity id="heart" gltf-model="#heartModel" scale="15 15 15" animation-mixer></a-entity>
+          <a-entity id="heart" gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0 0.6 0"></a-entity>
         </a-entity>
 
@@ -123,7 +123,7 @@
           const h3 = document.querySelector("#cell");
           const camera = document.querySelector("#mainCamera");
 
-          introSpeak("Welcome to the amazing journey inside the human body!, Everything you see around you—from your hands to your heart—is made up of tiny living units called cells. These cells join together to form tissues, build organs, and create the marvelous machine that is YOU!", () => {
+          introSpeak("Welcome to the amazing journey inside the human body!, Everything you see around you from your hands to your heart is made up of tiny living units called cells. These cells join together to form tissues, build organs, and create the marvelous machine that is YOU!", () => {
                 // Show quiz button after skin
                   h1.setAttribute("visible", "true");
                   setTimeout(() => {
