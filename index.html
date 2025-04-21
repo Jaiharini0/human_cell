@@ -32,6 +32,13 @@
         position="1 5.5 -1"
         scale="145 145 145"
         animation="property: rotation; to: 0 360 0; dur: 2000">
+        <a-entity id="body-scene" position="0 0 0">
+        <!-- Heart organ -->
+        <a-entity id="heart-group" position="0 1 0">
+          <a-entity id="heart" gltf-model="#heartModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0 0.6 0"></a-entity>
+        </a-entity>
+
       </a-entity>
 
       <!-- Skin Layers Model -->
@@ -52,22 +59,7 @@
         animation-mixer>
       </a-entity>
 
-      <a-entity id="label1" position="1 5.7 -1">
-        <a-circle radius="0.08" color="white" opacity="0.9" material="side: double"></a-circle>
-        <a-text 
-          value="1"
-          align="center"
-          color="black"
-          anchor="center">
-        </a-text>
-      </a-entity>
-
-      <a-entity id="infoPanel" visible="false" position="0 1.5 10">
-        <a-plane color="#000" width="1.5" height="0.6" opacity="0.7"></a-plane>
-        <a-text id="infoText" value="" color="white" position="-0.7 0.2 0.01"></a-text>
-      </a-entity>
-
-
+      
       <!-- Quiz Button -->
       <a-entity id="quizButton"
                 geometry="primitive: plane; height: 0.4; width: 1.5"
@@ -97,15 +89,22 @@
   </div>
 
   <script>
-      const label = document.querySelector('#label1');
-      const infoPanel = document.querySelector('#infoPanel');
-      const infoText = document.querySelector('#infoText');
+        AFRAME.registerComponent('animate-organs', {
+        init: function () {
+          setTimeout(() => {
+            // Move the heart to the right side
+            const heart = document.querySelector('#heart-group');
+            heart.setAttribute('animation', {
+              property: 'position',
+              to: '2 1 0', // Adjust position to float beside the body
+              dur: 1000,
+              easing: 'easeOutElastic'
+            });
     
-      label.addEventListener('click', () => {
-        infoText.setAttribute('value', 'Deltoid muscle');
-        infoPanel.setAttribute('visible', true);
+            // You can repeat this block for other organs
+          }, 2000);
+        }
       });
-    
       function introSpeak(text, callback) {
       let utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "en-US";
@@ -125,7 +124,7 @@
           const camera = document.querySelector("#mainCamera");
 
           introSpeak("Welcome to the amazing journey inside the human body!, Everything you see around you—from your hands to your heart—is made up of tiny living units called cells. These cells join together to form tissues, build organs, and create the marvelous machine that is YOU!", () => {
-                // Show quiz button after hibiscus parts
+                // Show quiz button after skin
                   h1.setAttribute("visible", "true");
                   setTimeout(() => {
                     camera.setAttribute("animation", {
@@ -142,7 +141,7 @@
                         h2.setAttribute("visible", "false");
                         h3.setAttribute("visible", "true");
       
-                        // Show quiz button after hibiscus parts
+                        // Show quiz button after skin
                         setTimeout(() => {
                           document.querySelector("#quizButton").setAttribute("visible", "true");
                         }, 3000);
