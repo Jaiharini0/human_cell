@@ -50,33 +50,57 @@
         </a-entity>
 
         <a-entity id="brain-group" position="0 0.8 -2">
-          <a-entity gltf-model="#brainModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#brainModel" scale="1 1 1"></a-entity>
           <a-entity text="value: Brain; color: red; align: center; width: 2" position="0 0.9 0"></a-entity>
+          <a-entity 
+            line="start: 0 0.8 -2; end: 0.4 0.8 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
 
         <a-entity id="lung-group" position="0 0.5 -2">
-          <a-entity gltf-model="#LungModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#LungModel" scale="1 1 1"></a-entity>
           <a-entity text="value:Lung; color: red; align: center; width: 2" position="0 0.4 0"></a-entity>
+          <a-entity 
+            line="start: 0 0.5 -2; end: -0.6 0.5 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
   
         <a-entity id="intestine-group" position="0 -0.5 -2">
-          <a-entity gltf-model="#intestineModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#intestineModel" scale="0.03 0.03 0.03"></a-entity>
           <a-entity text="value: Right Lung; color: red; align: center; width: 2" position="0 -0.4 0"></a-entity>
+          <a-entity 
+            line="start: 0 -0.5 -2; end: -0.6 -0.5 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
   
         <a-entity id="liver-group" position="0 0.4 -2">
-          <a-entity gltf-model="#liverModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#liverModel" scale="1 1 1"></a-entity>
           <a-entity text="value: Liver; color: red; align: center; width: 2" position="0 0.5 0"></a-entity>
+          <a-entity 
+            line="start: 0 0.4 -2; end: 0.6 0.4 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
   
         <a-entity id="kidney-group" position="0 -0.4 -2">
-          <a-entity gltf-model="#KidneyModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#KidneyModel" scale="3 3 3"></a-entity>
           <a-entity text="value:Kidney; color: red; align: center; width: 2" position="0 -0.3 0"></a-entity>
+          <a-entity 
+            line="start: 0 -0.4 -2; end: -0.8 -0.4 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
   
         <a-entity id="stomach-group" position="0 -0.3 -2">
-          <a-entity gltf-model="#stomachModel" scale="0.5 0.5 0.5"></a-entity>
+          <a-entity gltf-model="#stomachModel" scale="0.03 0.03 0.03"></a-entity>
           <a-entity text="value: Stomach; color: red; align: center; width: 2" position="0 -0.2 0"></a-entity>
+          <a-entity 
+            line="start: 0 -0.3 -2; end: 0.6 -0.3 -2; color: red"
+            position="0 0 0">
+          </a-entity>
         </a-entity>
 
       </a-entity>
