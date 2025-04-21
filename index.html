@@ -32,10 +32,10 @@
         gltf-model="#h_anatomy"
         position="1 5.5 -1"
         scale="145 145 145"
-        animation="property: rotation; to: 0 360 0; dur: 2000">
+        animation-mixer>
         <!-- Heart organ -->
-        <a-entity id="heart-group" position="-3 0 -2">
-          <a-entity id="heart" gltf-model="#heartModel" scale="25 25 25"></a-entity>
+        <a-entity id="heart-group" position="-1 0 -2">
+          <a-entity id="heart" gltf-model="#heartModel" scale="25 25 25" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0 0.6 0"></a-entity>
         </a-entity>
 
