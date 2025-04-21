@@ -40,7 +40,7 @@
         scale="145 145 145"
         animation-mixer>
         <!-- Heart organ -->
-        <a-entity id="heart-group" position="0 0.3 -2">
+        <a-entity id="heart-group" position="0 0.3 -1">
           <a-entity id="heart" gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0 0.4 0"></a-entity>
           <a-entity 
@@ -49,7 +49,7 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="brain-group" position="0 0.8 -2">
+        <a-entity id="brain-group" position="0 0.8 -1">
           <a-entity gltf-model="#brainModel" scale="1 1 1"></a-entity>
           <a-entity text="value: Brain; color: red; align: center;" position="0 0.7 0"></a-entity>
           <a-entity 
@@ -58,7 +58,7 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="lung-group" position="0 0.5 -2">
+        <a-entity id="lung-group" position="0 0.5 -1">
           <a-entity gltf-model="#LungModel" scale="1 1 1"></a-entity>
           <a-entity text="value:Lung; color: red; align: center;" position="0 0.4 0"></a-entity>
           <a-entity 
@@ -67,7 +67,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="intestine-group" position="0 -0.5 -2">
+        <a-entity id="intestine-group" position="0 -0.5 -1">
           <a-entity gltf-model="#intestineModel" scale="0.09 0.09 0.09"></a-entity>
           <a-entity text="value:Lungs; color: red; align: center;" position="0 -0.4 0"></a-entity>
           <a-entity 
@@ -76,7 +76,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="liver-group" position="0 0.4 -2">
+        <a-entity id="liver-group" position="0 0.4 -1">
           <a-entity gltf-model="#liverModel" scale="1 1 1"></a-entity>
           <a-entity text="value: Liver; color: red; align: center;" position="0 0.3 0"></a-entity>
           <a-entity 
@@ -85,7 +85,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="kidney-group" position="0 -0.4 -2">
+        <a-entity id="kidney-group" position="0 -0.4 -1">
           <a-entity gltf-model="#KidneyModel" scale="5 5 5"></a-entity>
           <a-entity text="value:Kidney; color: red; align: center;" position="0 -0.3 0"></a-entity>
           <a-entity 
@@ -94,7 +94,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="stomach-group" position="0 -0.3 -2">
+        <a-entity id="stomach-group" position="0 -0.3 -1">
           <a-entity gltf-model="#stomachModel" scale="0.09 0.09 0.09"></a-entity>
           <a-entity text="value: Stomach; color: red; align: center;" position="0 -0.2 0"></a-entity>
           <a-entity 
@@ -157,13 +157,13 @@
         init: function () {
           setTimeout(() => {
             const organs = [
-              { id: "heart-group", to: "0.5 0.3 -2" },
-              { id: "brain-group", to: "0.5 0.5 -2" },
-              { id: "lung-group", to: "-0.5 0.3 -2" },
-              { id: "intestine-group", to: "-0.5 0 -2" },
-              { id: "liver-group", to: "-0.5 0.2 -2" },
-              { id: "kidney-group", to: "0.5 0.1 -2" },
-              { id: "stomach-group", to: "0.5 0.2 -2" }
+              { id: "heart-group", to: "0.5 0.4 -1" },
+              { id: "brain-group", to: "0.5 0.6 -1" },
+              { id: "lung-group", to: "-0.5 0.3 -1" },
+              { id: "intestine-group", to: "-0.5 0 -1" },
+              { id: "liver-group", to: "-0.5 0.2 -1" },
+              { id: "kidney-group", to: "0.5 0.09 -1" },
+              { id: "stomach-group", to: "0.5 0.2 -1" }
             ];
 
             organs.forEach((organ, index) => {
