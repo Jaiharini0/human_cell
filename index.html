@@ -153,8 +153,9 @@
   </div>
 
   <script>
-    AFRAME.registerComponent("organ-animations", {
+     AFRAME.registerComponent("organ-animations", {
         init: function () {
+          setTimeout(() => {
             const organs = [
               { id: "heart-group", to: "0.5 0.4 -2" },
               { id: "brain-group", to: "0.5 0.6 -2" },
@@ -165,32 +166,19 @@
               { id: "stomach-group", to: "0.5 0.2 -2" }
             ];
 
-            // Start all off-screen first
-            organs.forEach(org => {
-              const el = document.getElementById(org.id);
-              if (el) {
-                el.setAttribute("position", "0 0 -5");
-                el.setAttribute("visible", false);
-              }
+            organs.forEach((organ, index) => {
+              const el = document.querySelector("#" + organ.id);
+              el.setAttribute("animation__move", {
+                property: "position",
+                from: "0 0 0",
+                to: organ.to,
+                dur: 2000 + index * 200, // stagger the timing
+                easing: "easeOutQuad"
+              });
             });
-      
-            // Animate in one by one with delays
-            organs.forEach((org, i) => {
-              const el = document.getElementById(org.id);
-              if (el) {
-                setTimeout(() => {
-                  el.setAttribute("visible", true);
-                  el.setAttribute("animation__flyin", {
-                    property: "position",
-                    to: org.to,
-                    dur: 1000,
-                    easing: "easeOutElastic"
-                  });
-                }, i * 800); // 800ms delay between each organ
-              }
-            });/ Wait 2 seconds after loading body
-          }
-        });
+          }, 2000); // Wait 2 seconds after loading body
+        }
+      });
 
         
       function introSpeak(text, callback) {
