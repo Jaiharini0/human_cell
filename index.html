@@ -76,11 +76,11 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="liver-group" position="0 0.2 -2">
+        <a-entity id="liver-group" position="0 0.1 -2">
           <a-entity gltf-model="#liverModel" scale="1 1 1" animation-mixer></a-entity>
-          <a-entity text="value: Liver; color: red; align: center;" position="0 0.2 0"></a-entity>
+          <a-entity text="value: Liver; color: red; align: center;" position="0 0.1 0"></a-entity>
           <a-entity 
-            line="start: 0 0.2 -2; end: -0.6 0.2 -2; color: red"
+            line="start: 0 0.1 -2; end: -0.6 0.1 -2; color: red"
             position="0 0 0">
           </a-entity>
         </a-entity>
@@ -96,7 +96,7 @@
   
         <a-entity id="stomach-group" position="0 0.2 -2">
           <a-entity gltf-model="#stomachModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
-          <a-entity text="value: Stomach; color: red; align: center;" position="0 0.2 0"></a-entity>
+          <a-entity text="value: Stomach; color: red; align: center;" position="0 0 0"></a-entity>
           <a-entity 
             line="start: 0 0.2 -2; end: 0.4 0.2 -2; color: red"
             position="0 0 0">
@@ -161,7 +161,7 @@
               { id: "brain-group", to: "0.5 0.6 -2" },
               { id: "lung-group", to: "-0.5 0.3 -2" },
               { id: "intestine-group", to: "-0.5 0 -2" },
-              { id: "liver-group", to: "-0.5 0.2 -2" },
+              { id: "liver-group", to: "-0.5 0.1 -2" },
               { id: "kidney-group", to: "0.5 0.09 -2" },
               { id: "stomach-group", to: "0.5 0.2 -2" }
             ];
