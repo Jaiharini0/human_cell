@@ -158,12 +158,12 @@
           setTimeout(() => {
             const organs = [
               { id: "heart-group", to: "0.5 0.3 -2" },
-              { id: "brain-group", to: "0.5 0.5 -2" },
-              { id: "lung-group", to: "-0.5 0.6 -2" },
-              { id: "intestine-group", to: "-0.5 -0.1 -2" },
+              { id: "brain-group", to: "0.5 0.4 -2" },
+              { id: "lung-group", to: "-0.5 0.7 -2" },
+              { id: "intestine-group", to: "-0.5 -0 -2" },
               { id: "liver-group", to: "0.7 0.2 -2" },
-              { id: "kidney-group", to: "-0.9 -0 -2" },
-              { id: "stomach-group", to: "0.7 -0.02 -2" }
+              { id: "kidney-group", to: "-0.7 -0 0" },
+              { id: "stomach-group", to: "0.5 -0.02 0" }
             ];
 
             organs.forEach((organ, index) => {
@@ -173,7 +173,7 @@
                 from: "0 0 0",
                 to: organ.to,
                 dur: 1500 + index * 200, // stagger the timing
-                easing: "easeOutElastic"
+                easing: "easeOutQuad"
               });
             });
           }, 2000); // Wait 2 seconds after loading body
