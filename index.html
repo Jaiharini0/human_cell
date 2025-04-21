@@ -86,7 +86,7 @@
         </a-entity>
   
         <a-entity id="kidney-group" position="0 -0.4 -2">
-          <a-entity gltf-model="#KidneyModel" scale="3 3 3"></a-entity>
+          <a-entity gltf-model="#KidneyModel" scale="5 5 5"></a-entity>
           <a-entity text="value:Kidney; color: red; align: center; width: 2" position="0 -0.3 0"></a-entity>
           <a-entity 
             line="start: 0 -0.4 -2; end: -0.8 -0.4 -2; color: red"
@@ -159,11 +159,11 @@
             const organs = [
               { id: "heart-group", to: "0.5 0.3 -2" },
               { id: "brain-group", to: "0.5 0.4 -2" },
-              { id: "lung-group", to: "-0.5 0.7 -2" },
+              { id: "lung-group", to: "-0.5 0.2 -2" },
               { id: "intestine-group", to: "-0.5 -0 -2" },
-              { id: "liver-group", to: "0.7 0.2 -2" },
-              { id: "kidney-group", to: "-0.7 -0 0" },
-              { id: "stomach-group", to: "0.5 -0.02 0" }
+              { id: "liver-group", to: "0.5 0.2 -2" },
+              { id: "kidney-group", to: "-0.5 -0 -2" },
+              { id: "stomach-group", to: "0.5 -0.2 -2" }
             ];
 
             organs.forEach((organ, index) => {
