@@ -34,7 +34,7 @@
         scale="145 145 145"
         animation-mixer>
         <!-- Heart organ -->
-        <a-entity id="heart-group" position="0.5 0 -2">
+        <a-entity id="heart-group" position="-0.5 0 -2">
           <a-entity id="heart" gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0 0.6 0"></a-entity>
         </a-entity>
@@ -96,7 +96,7 @@
             const heart = document.querySelector('#heart-group');
             heart.setAttribute('animation', {
               property: 'position',
-              to: '-3 1 0', // Adjust position to float beside the body
+              to: '3 1 0', // Adjust position to float beside the body
               dur: 1500,
               easing: 'easeOutQuad'
             });
