@@ -219,7 +219,7 @@
           speech.lang = 'en-US';
           window.speechSynthesis.speak(speech);
   
-          // Reset after narration ends (optional)
+          // Reset after narration ends 
           speech.onend = () => {
             bodyModel.setAttribute("visible", true);
             organs.forEach((o) => {
@@ -229,8 +229,8 @@
               if (o.id === "brain") o.setAttribute("position", "0.5 0.6 -2");
               if (o.id === "lungs") o.setAttribute("position", "-0.5 0.3 -2");
               if (o.id === "intestine") o.setAttribute("position", "-0.5 0 -2");
-              if (o.id === "liver") o.setAttribute("position", "0.5 0.1 -2");
-              if (o.id === "kidney") o.setAttribute("position", "-0.5 0.09 -2");
+              if (o.id === "liver") o.setAttribute("position", "-0.6 0.1 -2");
+              if (o.id === "kidney") o.setAttribute("position", "0.7 0.09 -2");
               if (o.id === "stomach") o.setAttribute("position", "0.5 0.2 -2");
             });
           };
