@@ -40,7 +40,7 @@
         scale="145 145 145"
         animation-mixer>
         <!-- Heart organ -->
-        <a-entity id="heart-group" position="0 0.4 -2">
+        <a-entity id="heart-group" class="organ" position="0 0.4 -2">
           <a-entity id="heart" gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0.1 0 0"></a-entity>
           <a-entity 
@@ -49,7 +49,7 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="brain-group" position="0 0.6 -2">
+        <a-entity id="brain-group" class="organ" position="0 0.6 -2">
           <a-entity gltf-model="#brainModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Brain; color: red; align: center;" position="0.1 0 0"></a-entity>
           <a-entity 
@@ -58,7 +58,7 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="lung-group" position="0 0.3 -2">
+        <a-entity id="lung-group" class="organ" position="0 0.3 -2">
           <a-entity gltf-model="#LungModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value:Lungs; color: red; align: center;" position="0 0.3 0"></a-entity>
           <a-entity 
@@ -67,7 +67,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="intestine-group" position="0 0 -2">
+        <a-entity id="intestine-group" class="organ" position="0 0 -2">
           <a-entity gltf-model="#intestineModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value:Intestine; color: red; align: center;" position="0 0.09 0"></a-entity>
           <a-entity 
@@ -76,7 +76,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="liver-group" position="0 0.1 -2">
+        <a-entity id="liver-group" class="organ" position="0 0.1 -2">
           <a-entity gltf-model="#liverModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Liver; color: red; align: center;" position="0 0.1 0"></a-entity>
           <a-entity 
@@ -85,7 +85,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="kidney-group" position="0 0.09 -2">
+        <a-entity id="kidney-group" class="organ" position="0 0.09 -2">
           <a-entity gltf-model="#KidneyModel" scale="6 6 6" animation-mixer></a-entity>
           <a-entity text="value:Kidneys; color: red; align: center;" position="0 0.1 0"></a-entity>
           <a-entity 
@@ -94,7 +94,7 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="stomach-group" position="0 0.2 -2">
+        <a-entity id="stomach-group" class="organ" position="0 0.2 -2">
           <a-entity gltf-model="#stomachModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value: Stomach; color: red; align: center;" position="0 0 0"></a-entity>
           <a-entity 
@@ -179,6 +179,55 @@
           }, 2000); // Wait 2 seconds after loading body
         }
       });
+      document.addEventListener("DOMContentLoaded", () => {
+      const bodyModel = document.getElementById("body-model");
+      const organs = document.querySelectorAll(".organ");
+  
+      // Narration for each organ
+      const organNarration = {
+        heart: "This is the heart. It pumps blood to all parts of the body.",
+        brain: "This is the brain. It controls thoughts, memory, and actions.",
+        lungs: "These are the lungs. They help in breathing.",
+        liver: "This is the liver. It helps filter blood and supports digestion.",
+        kidney: "These are the kidneys. They filter waste from the blood.",
+        intestine: "This is the intestine. It absorbs nutrients from digested food.",
+        stomach: "This is the stomach. It breaks down food with acids."
+      };
+  
+      organs.forEach((organ) => {
+        organ.addEventListener("click", () => {
+          // Hide body and other organs
+          bodyModel.setAttribute("visible", false);
+          organs.forEach((o) => {
+            if (o !== organ) o.setAttribute("visible", false);
+          });
+  
+          // Center the clicked organ
+          organ.setAttribute("position", "0 1.6 -1");
+  
+          // Speak organ description
+          const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
+          speech.lang = 'en-US';
+          window.speechSynthesis.speak(speech);
+  
+          // Reset after narration ends (optional)
+          speech.onend = () => {
+            bodyModel.setAttribute("visible", true);
+            organs.forEach((o) => {
+              o.setAttribute("visible", true);
+              // Reset position if needed (custom per organ)
+              if (o.id === "heart") o.setAttribute("position", "0.5 0.4 -2");
+              if (o.id === "brain") o.setAttribute("position", "0.5 0.6 -2");
+              if (o.id === "lungs") o.setAttribute("position", "-0.5 0.3 -2");
+              if (o.id === "intestine") o.setAttribute("position", "-0.5 0 -2");
+              if (o.id === "liver") o.setAttribute("position", "0.5 0.1 -2");
+              if (o.id === "kidney") o.setAttribute("position", "-0.5 0.09 -2");
+              if (o.id === "stomach") o.setAttribute("position", "0.5 0.2 -2");
+            });
+          };
+        });
+      });
+    });
 
         
       function introSpeak(text, callback) {
