@@ -43,7 +43,7 @@
         <a-entity id="heart" class="organ" position="0 0.4 -2" visible="true">
           <a-entity gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0.1 0 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.4 -2; end: 0.4 0.4 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -52,7 +52,7 @@
         <a-entity id="brain" class="organ" position="0 0.6 -2" visible="true">
           <a-entity gltf-model="#brainModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Brain; color: red; align: center;" position="0.1 0 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.6 -2; end: 0.4 0.6 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -61,7 +61,7 @@
         <a-entity id="lungs" class="organ" position="0 0.3 -2" visible="true">
           <a-entity gltf-model="#LungModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value:Lungs; color: red; align: center;" position="0 0.3 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.3 -2; end: -0.6 0.3 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -70,7 +70,7 @@
         <a-entity id="intestine" class="organ" position="0 0 -2" visible="true">
           <a-entity gltf-model="#intestineModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value:Intestine; color: red; align: center;" position="0 0.09 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0 -2; end: -0.4 0 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -79,7 +79,7 @@
         <a-entity id="liver" class="organ" position="0 0.1 -2" visible="true">
           <a-entity gltf-model="#liverModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Liver; color: red; align: center;" position="0 0.1 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.1 -2; end: -0.6 0.1 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -88,7 +88,7 @@
         <a-entity id="kidney" class="organ" position="0 0.09 -2" visible="true">
           <a-entity gltf-model="#KidneyModel" scale="6 6 6" animation-mixer></a-entity>
           <a-entity text="value:Kidneys; color: red; align: center;" position="0 0.1 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.09 -2; end: 0.6 0.09 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -97,7 +97,7 @@
         <a-entity id="stomach" class="organ" position="0 0.2 -2" visible="true">
           <a-entity gltf-model="#stomachModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value: Stomach; color: red; align: center;" position="0 0 0"></a-entity>
-          <a-entity 
+          <a-entity id="line"
             line="start: 0 0.2 -2; end: 0.4 0.2 -2; color: red"
             position="0 0 0">
           </a-entity>
@@ -193,6 +193,7 @@
         document.addEventListener("DOMContentLoaded", () => {
         const bodyModel = document.getElementById("anatomy");
         const organs = document.querySelectorAll(".organ");
+        const lines = document.getElementById("line");
         const defaultPositions = {
             heart: "0.5 0.4 -2",
             brain: "0.5 0.6 -2",
@@ -220,6 +221,7 @@
             organ.addEventListener("click", () => {
                 // Keep the clicked organ visible
                 organ.setAttribute("visible", true);
+                lines.setAttribute("visible", false);
                 // Move clicked organ to center smoothly
                 organ.removeAttribute("animation__move");
                 organ.setAttribute("position", defaultPositions[organ.id]);
@@ -283,7 +285,7 @@
     
                     // Fade body and other organs back in after a short delay
                     setTimeout(() => {
-                        //bodyModel.setAttribute("visible", true);
+                        lines.setAttribute("visible", true);
                         organs.forEach((o) => {
                             o.setAttribute("visible", true);
                         });
