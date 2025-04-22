@@ -235,7 +235,7 @@
               
                 // Hide body with visibility toggle
                 // Move the body to a new position (shift it out of view)
-                bodyModel.removeAttribute("animation__bodymove");
+                bodyModel.removeAttribute("animation__moveBody");
                 setTimeout(() => {
                   bodyModel.setAttribute("animation__moveBody", {
                       property: "position",
@@ -271,7 +271,7 @@
                       });
                   
                     // Move body back to its original position
-                    bodyModel.removeAttribute("animation__bodyreturn");
+                    bodyModel.removeAttribute("animation__moveBackBody");
                     setTimeout(() => {
                       bodyModel.setAttribute("animation__moveBackBody", {
                           property: "position",
