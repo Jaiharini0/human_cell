@@ -114,8 +114,8 @@
         </a-entity>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
-      
-      <!-- Quiz Button -->
+
+      <!-- Quiz Button For Cell-->
       <a-entity id="quizButton"
                 geometry="primitive: plane; height: 0.4; width: 1.5"
                 material="color: #28a745; opacity: 0.9"
@@ -131,6 +131,7 @@
         <a-cursor></a-cursor>
       </a-camera>
     </a-scene>
+    
     <!-- Quiz UI -->
     <div id="quiz-container" style="display: none; position: absolute; top: 10%; left: 5%; background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 400px; z-index: 1000;">
       <div style="text-align: right;">
@@ -159,6 +160,7 @@
     
         // After delay, show cell model
         setTimeout(() => {
+          document.querySelector("#quizButton").setAttribute("visible", "true");
           cellModel.setAttribute("visible", true);
         }, 3000); 
       }
@@ -336,10 +338,10 @@
     });
 
     const quizData = [
-      { question: "Which part is male reproductive?", options: ["Pistil", "Sepal", "Stamen"], answer: "Stamen" },
-      { question: "Which part is female reproductive?", options: ["Filament", "Stamen", "Pistil"], answer: "Pistil" },
-      { question: "Which part attracts the pollen grains?", options: ["Stamen", "Anther", "Petal"], answer: "Petal" },
-      { question: "Which part protects the buds?", options: ["Sepal", "Petal", "Stamen"], answer: "Sepal" }
+      { question: "Which part of the body pumps blood to all parts of the body?", options: ["Heart", "Brain", "Liver"], answer: "Heart" },
+      { question: "Which part of the body helps for breathing?", options: ["Lungs", "Kidney", "Stomach"], answer: "Lungs" },
+      { question: "Which part of the body filters waste from the blood?", options: ["Liver", "Intestine", "Kidney"], answer: "Kidney" },
+      { question: "Which part of the body controls thoughts, memory, and actions?", options: ["Brain", "Lungs", "Stomach"], answer: "Brain" }
     ];
 
     let currentQuestion = 0;
