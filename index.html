@@ -203,7 +203,7 @@
             stomach: "0.5 0.2 -2"
         };
         const bodyDefaultPosition = "1 5.5 -1";  // Initial position of the body
-        const bodyMovedPosition = "0 0 -5";
+        const bodyMovedPosition = "0 -1 -5";
     
         // Narration for each organ
         const organNarration = {
@@ -235,12 +235,15 @@
               
                 // Hide body with visibility toggle
                 // Move the body to a new position (shift it out of view)
-                bodyModel.setAttribute("animation__moveBody", {
-                    property: "position",
-                    to: bodyMovedPosition,
-                    dur: 500,
-                    easing: "easeInOutQuad"
-                });
+                bodyModel.removeAttribute("animation__bodymove");
+                setTimeout(() => {
+                  bodyModel.setAttribute("animation__moveBody", {
+                      property: "position",
+                      to: bodyMovedPosition,
+                      dur: 500,
+                      easing: "easeInOutQuad"
+                  });
+                }, 10);
                 
     
                 // Hide other organs
@@ -268,12 +271,15 @@
                       });
                   
                     // Move body back to its original position
-                    bodyModel.setAttribute("animation__moveBackBody", {
-                        property: "position",
-                        to: bodyDefaultPosition,
-                        dur: 800,
-                        easing: "easeInOutQuad"
-                    });
+                    bodyModel.removeAttribute("animation__bodyreturn");
+                    setTimeout(() => {
+                      bodyModel.setAttribute("animation__moveBackBody", {
+                          property: "position",
+                          to: bodyDefaultPosition,
+                          dur: 800,
+                          easing: "easeInOutQuad"
+                      });
+                    }, 10);
     
                     // Fade body and other organs back in after a short delay
                     setTimeout(() => {
