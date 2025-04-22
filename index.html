@@ -126,11 +126,14 @@
                 onclick="showQuiz()">
       </a-entity>
 
+      <a-entity orbit-controls="auto-rotate: true; enableDamping: true; dampingFactor: 0.25;" position="0 1.5 -5"></a-entity>
+
       <!-- Camera with raycaster & cursor -->
       <a-camera id="mainCamera" position="1 5 5" rotation="-30 -45 0" look-controls>
         <a-cursor></a-cursor>
       </a-camera>
     </a-scene>
+    
     
     <!-- Quiz UI -->
     <div id="quiz-container" style="display: none; position: absolute; top: 10%; left: 5%; background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 15px; width: 90%; max-width: 400px; z-index: 1000;">
