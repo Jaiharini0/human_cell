@@ -216,6 +216,8 @@
     
         organs.forEach((organ) => {
             organ.addEventListener("click", () => {
+                // Keep the clicked organ visible
+                organ.setAttribute("visible", true);
                 // Move clicked organ to center smoothly
                 organ.setAttribute("animation__move", {
                     property: "position",
@@ -225,7 +227,7 @@
                 });
               
                 // Hide body with visibility toggle
-                bodyModel.setAttribute("visible", false);
+                //bodyModel.setAttribute("visible", false);
     
                 // Hide other organs
                 organs.forEach((o) => {
@@ -251,7 +253,7 @@
     
                     // Fade body and other organs back in after a short delay
                     setTimeout(() => {
-                        bodyModel.setAttribute("visible", true);
+                        //bodyModel.setAttribute("visible", true);
                         organs.forEach((o) => {
                             o.setAttribute("visible", true);
                         });
