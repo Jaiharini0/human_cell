@@ -203,7 +203,7 @@
           });
   
           // Center the clicked organ
-          organ.setAttribute("position", "0 1.6 -1");
+          organ.setAttribute("position", "0 0 -1");
   
           // Speak organ description
           const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
@@ -271,7 +271,7 @@
                           document.querySelector("#quizButton").setAttribute("visible", "true");
                         }, 3000);
                       }, 5000); 
-                  }, 1000);
+                  }, 10000);
           });
         }
       } catch (err) {
