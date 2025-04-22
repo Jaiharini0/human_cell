@@ -116,7 +116,7 @@
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
 
-      <a-sphere id="part1" position="1 0 -90" radius="0.5" color="red">
+      <a-sphere id="part1" position="1 0 -90" radius="0.5" color="red" visible="false">
       <a-text value="1" position="1 0 -90" scale="2 2 2" align="center"></a-text>
       </a-sphere>
     
@@ -168,9 +168,11 @@
           // Show skin model first
         const skinModel = document.getElementById("skin");
         const cellModel = document.getElementById("cell");
-    
+        introSpeak("The human body consists of various layers, including the skin, which is the body's largest organ. The skin has three primary layers: the epidermis (outer layer), dermis (middle layer), and hypodermis (deepest layer).", () => {
+        document.getElementById("part1").setAttribute("visible", true);
         skinModel.setAttribute("visible", true);
         cellModel.setAttribute("visible", false);
+        });
     
         // After delay, show cell model
         setTimeout(() => {
