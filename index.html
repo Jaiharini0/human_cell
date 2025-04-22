@@ -213,6 +213,7 @@
   
           // Center the clicked organ
           organ.setAttribute("position", "0 0 -1");
+          organ.setAttribute("visible", false);
   
           // Speak organ description
           const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
