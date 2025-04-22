@@ -202,6 +202,8 @@
             kidney: "0.7 0.09 -2",
             stomach: "0.5 0.2 -2"
         };
+        const bodyDefaultPosition = "1 5.5 -1";  // Initial position of the body
+        const bodyMovedPosition = "0 0 -5";
     
         // Narration for each organ
         const organNarration = {
@@ -227,7 +229,14 @@
                 });
               
                 // Hide body with visibility toggle
-                //bodyModel.setAttribute("visible", false);
+                // Move the body to a new position (shift it out of view)
+                bodyModel.setAttribute("animation__moveBody", {
+                    property: "position",
+                    to: bodyMovedPosition,
+                    dur: 500,
+                    easing: "easeInOutQuad"
+                });
+                
     
                 // Hide other organs
                 organs.forEach((o) => {
@@ -247,6 +256,14 @@
                     organ.setAttribute("animation__return", {
                         property: "position",
                         to: defaultPositions[organ.id],
+                        dur: 800,
+                        easing: "easeInOutQuad"
+                    });
+                  
+                    // Move body back to its original position
+                    bodyModel.setAttribute("animation__moveBackBody", {
+                        property: "position",
+                        to: bodyDefaultPosition,
                         dur: 800,
                         easing: "easeInOutQuad"
                     });
