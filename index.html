@@ -108,11 +108,11 @@
 
       <!-- Skin Layers Model -->
       <a-entity id="skin-cell-models" visible="false">
-        <a-entity id="skin" position="1 1 -100" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+        <a-entity id="skin" position="1 1 -95" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
         </a-entity>  
         <a-entity id="cell" position="1 5 -3" scale="7 7 7" visible="false" gltf-model="#h_cell" animation-mixer>
-          <a-camera position="0 1.6 3" look-at="#cell"></a-camera>
         </a-entity>
+        <a-camera position="0 1.6 3" look-at="#cell"></a-camera>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
 
