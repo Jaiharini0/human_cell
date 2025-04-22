@@ -178,19 +178,13 @@
   
               organs.forEach((organ, index) => {
                 const el = document.querySelector("#" + organ.id);
-                const label = document.querySelector(`#${organ.id}-label`); 
                 el.setAttribute("animation__move", {
                   property: "position",
                   from: "0 0 0",
                   to: organ.to,
                   dur: 3000 + index * 200, // stagger the timing
                   easing: "easeOutQuad"
-                  complete: function () {
-                    // After moving, make sure the label is visible
-                    label.setAttribute("visible", true);
-                  }
                 });
-                label.setAttribute("visible", false);
               });
             }, 2000); // Wait 2 seconds after loading body
           }
@@ -224,25 +218,6 @@
     
         organs.forEach((organ) => {
             organ.addEventListener("click", () => {
-                const label = organ.querySelector(".organ-label"); // Find the label of the clicked organ
-                const organId = organ.getAttribute('id');
-          
-                // Hide the label of the clicked organ when it is clicked
-                label.setAttribute("visible", false);
-          
-                // Move the clicked organ to the center and animate it
-                organ.removeAttribute("animation__move"); // Reset any previous animations
-                organ.setAttribute("animation__move", {
-                  property: "position",
-                  from: organ.getAttribute("position"),
-                  to: "0 0 0",  // Center position (or any other desired position)
-                  dur: 1500, // Duration of animation
-                  easing: "easeOutQuad",
-                  complete: () => {
-                    // After animation completes, make sure the label is visible again
-                    label.setAttribute("visible", true);
-                  }
-                });
                 // Keep the clicked organ visible
                 organ.setAttribute("visible", true);
                 // Move clicked organ to center smoothly
@@ -295,24 +270,24 @@
                           easing: "easeInOutQuad"
                       });
                   
-                      // Move body back to its original position
-                      bodyModel.removeAttribute("animation__moveBackBody");
-                      setTimeout(() => {
-                        bodyModel.setAttribute("animation__moveBackBody", {
-                            property: "position",
-                            to: bodyDefaultPosition,
-                            dur: 800,
-                            easing: "easeInOutQuad"
-                        });
-                      }, 10);
+                    // Move body back to its original position
+                    bodyModel.removeAttribute("animation__moveBackBody");
+                    setTimeout(() => {
+                      bodyModel.setAttribute("animation__moveBackBody", {
+                          property: "position",
+                          to: bodyDefaultPosition,
+                          dur: 800,
+                          easing: "easeInOutQuad"
+                      });
+                    }, 10);
     
-                      // Fade body and other organs back in after a short delay
-                      setTimeout(() => {
-                          //bodyModel.setAttribute("visible", true);
-                          organs.forEach((o) => {
-                              o.setAttribute("visible", true);
-                          });
-                      }, 800); // Wait for organ to finish returning
+                    // Fade body and other organs back in after a short delay
+                    setTimeout(() => {
+                        //bodyModel.setAttribute("visible", true);
+                        organs.forEach((o) => {
+                            o.setAttribute("visible", true);
+                        });
+                    }, 800); // Wait for organ to finish returning
                   }, 10);
                 };
             });
