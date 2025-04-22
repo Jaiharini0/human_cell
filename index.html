@@ -221,6 +221,7 @@
             organ.addEventListener("click", () => {
                 // Keep the clicked organ visible
                 organ.setAttribute("visible", true);
+                lines.removeAttribute();
                 lines.setAttribute("visible", false);
                 // Move clicked organ to center smoothly
                 organ.removeAttribute("animation__move");
@@ -285,6 +286,7 @@
     
                     // Fade body and other organs back in after a short delay
                     setTimeout(() => {
+                        lines.removeAttribute();
                         lines.setAttribute("visible", true);
                         organs.forEach((o) => {
                             o.setAttribute("visible", true);
