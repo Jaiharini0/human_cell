@@ -221,12 +221,17 @@
                 // Keep the clicked organ visible
                 organ.setAttribute("visible", true);
                 // Move clicked organ to center smoothly
-                organ.setAttribute("animation__move", {
-                    property: "position",
-                    to: "0 0 -1",
-                    dur: 500,
-                    easing: "easeInOutQuad"
-                });
+                organ.removeAttribute("animation__move");
+                organ.setAttribute("position", defaultPositions[organ.id]);
+                setTimeout(() => {
+                  organ.setAttribute("animation__move", {
+                      property: "position",
+                      to: "0 0 -1",
+                      dur: 500,
+                      easing: "easeInOutQuad"
+                  });
+                }, 10); // Tiny delay so the DOM registers the change
+
               
                 // Hide body with visibility toggle
                 // Move the body to a new position (shift it out of view)
@@ -253,12 +258,14 @@
                 // When narration ends
                 speech.onend = () => {
                     // Move organ back to original position
-                    organ.setAttribute("animation__return", {
-                        property: "position",
-                        to: defaultPositions[organ.id],
-                        dur: 800,
-                        easing: "easeInOutQuad"
-                    });
+                    organ.removeAttribute("animation__return");
+                    setTimeout(() => {
+                      organ.setAttribute("animation__return", {
+                          property: "position",
+                          to: defaultPositions[organ.id],
+                          dur: 800,
+                          easing: "easeInOutQuad"
+                      });
                   
                     // Move body back to its original position
                     bodyModel.setAttribute("animation__moveBackBody", {
@@ -275,6 +282,7 @@
                             o.setAttribute("visible", true);
                         });
                     }, 800); // Wait for organ to finish returning
+                  }, 10);
                 };
             });
         });
