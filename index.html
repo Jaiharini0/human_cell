@@ -295,24 +295,24 @@
                           easing: "easeInOutQuad"
                       });
                   
-                    // Move body back to its original position
-                    bodyModel.removeAttribute("animation__moveBackBody");
-                    setTimeout(() => {
-                      bodyModel.setAttribute("animation__moveBackBody", {
-                          property: "position",
-                          to: bodyDefaultPosition,
-                          dur: 800,
-                          easing: "easeInOutQuad"
-                      });
-                    }, 10);
-    
-                    // Fade body and other organs back in after a short delay
-                    setTimeout(() => {
-                        //bodyModel.setAttribute("visible", true);
-                        organs.forEach((o) => {
-                            o.setAttribute("visible", true);
+                      // Move body back to its original position
+                      bodyModel.removeAttribute("animation__moveBackBody");
+                      setTimeout(() => {
+                        bodyModel.setAttribute("animation__moveBackBody", {
+                            property: "position",
+                            to: bodyDefaultPosition,
+                            dur: 800,
+                            easing: "easeInOutQuad"
                         });
-                    }, 800); // Wait for organ to finish returning
+                      }, 10);
+    
+                      // Fade body and other organs back in after a short delay
+                      setTimeout(() => {
+                          //bodyModel.setAttribute("visible", true);
+                          organs.forEach((o) => {
+                              o.setAttribute("visible", true);
+                          });
+                      }, 800); // Wait for organ to finish returning
                   }, 10);
                 };
             });
