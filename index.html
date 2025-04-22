@@ -40,8 +40,8 @@
         scale="145 145 145"
         animation-mixer>
         <!-- Heart organ -->
-        <a-entity id="heart-group" class="organ" position="0 0.4 -2">
-          <a-entity id="heart" gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
+        <a-entity id="heart" class="organ" position="0 0.4 -2">
+          <a-entity gltf-model="#heartModel" scale="5 5 5" animation-mixer></a-entity>
           <a-entity id="heart-label" text="value: Heart; align: center; color: red" position="0.1 0 0"></a-entity>
           <a-entity 
             line="start: 0 0.4 -2; end: 0.4 0.4 -2; color: red"
@@ -49,8 +49,8 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="brain-group" class="organ" position="0 0.6 -2">
-          <a-entity id="brain" gltf-model="#brainModel" scale="1 1 1" animation-mixer></a-entity>
+        <a-entity id="brain" class="organ" position="0 0.6 -2">
+          <a-entity gltf-model="#brainModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Brain; color: red; align: center;" position="0.1 0 0"></a-entity>
           <a-entity 
             line="start: 0 0.6 -2; end: 0.4 0.6 -2; color: red"
@@ -58,8 +58,8 @@
           </a-entity>
         </a-entity>
 
-        <a-entity id="lung-group" class="organ" position="0 0.3 -2">
-          <a-entity id="lungs" gltf-model="#LungModel" scale="1 1 1" animation-mixer></a-entity>
+        <a-entity id="lungs" class="organ" position="0 0.3 -2">
+          <a-entity gltf-model="#LungModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value:Lungs; color: red; align: center;" position="0 0.3 0"></a-entity>
           <a-entity 
             line="start: 0 0.3 -2; end: -0.6 0.3 -2; color: red"
@@ -67,8 +67,8 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="intestine-group" class="organ" position="0 0 -2">
-          <a-entity id="intestine" gltf-model="#intestineModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
+        <a-entity id="intestine" class="organ" position="0 0 -2">
+          <a-entity gltf-model="#intestineModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value:Intestine; color: red; align: center;" position="0 0.09 0"></a-entity>
           <a-entity 
             line="start: 0 0 -2; end: -0.4 0 -2; color: red"
@@ -76,8 +76,8 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="liver-group" class="organ" position="0 0.1 -2">
-          <a-entity id="liver" gltf-model="#liverModel" scale="1 1 1" animation-mixer></a-entity>
+        <a-entity id="liver" class="organ" position="0 0.1 -2">
+          <a-entity gltf-model="#liverModel" scale="1 1 1" animation-mixer></a-entity>
           <a-entity text="value: Liver; color: red; align: center;" position="0 0.1 0"></a-entity>
           <a-entity 
             line="start: 0 0.1 -2; end: -0.6 0.1 -2; color: red"
@@ -85,8 +85,8 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="kidney-group" class="organ" position="0 0.09 -2">
-          <a-entity id="kidney" gltf-model="#KidneyModel" scale="6 6 6" animation-mixer></a-entity>
+        <a-entity id="kidney" class="organ" position="0 0.09 -2">
+          <a-entity gltf-model="#KidneyModel" scale="6 6 6" animation-mixer></a-entity>
           <a-entity text="value:Kidneys; color: red; align: center;" position="0 0.1 0"></a-entity>
           <a-entity 
             line="start: 0 0.09 -2; end: 0.6 0.09 -2; color: red"
@@ -94,8 +94,8 @@
           </a-entity>
         </a-entity>
   
-        <a-entity id="stomach-group" class="organ" position="0 0.2 -2">
-          <a-entity id="stomach" gltf-model="#stomachModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
+        <a-entity id="stomach" class="organ" position="0 0.2 -2">
+          <a-entity gltf-model="#stomachModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
           <a-entity text="value: Stomach; color: red; align: center;" position="0 0 0"></a-entity>
           <a-entity 
             line="start: 0 0.2 -2; end: 0.4 0.2 -2; color: red"
@@ -157,13 +157,13 @@
         init: function () {
           setTimeout(() => {
             const organs = [
-              { id: "heart-group", to: "0.5 0.4 -2" },
-              { id: "brain-group", to: "0.5 0.6 -2" },
-              { id: "lung-group", to: "-0.5 0.3 -2" },
-              { id: "intestine-group", to: "-0.4 0 -2" },
-              { id: "liver-group", to: "-0.6 0.1 -2" },
-              { id: "kidney-group", to: "0.7 0.09 -2" },
-              { id: "stomach-group", to: "0.5 0.2 -2" }
+              { id: "heart", to: "0.5 0.4 -2" },
+              { id: "brain", to: "0.5 0.6 -2" },
+              { id: "lungs", to: "-0.5 0.3 -2" },
+              { id: "intestine", to: "-0.4 0 -2" },
+              { id: "liver", to: "-0.6 0.1 -2" },
+              { id: "kidney", to: "0.7 0.09 -2" },
+              { id: "stomach", to: "0.5 0.2 -2" }
             ];
 
             organs.forEach((organ, index) => {
