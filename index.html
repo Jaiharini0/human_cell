@@ -108,15 +108,15 @@
 
       <!-- Skin Layers Model -->
       <a-entity id="skin-cell-models" visible="false">
-        <a-entity id="skin" position="1 1 -100" scale="2 2 2" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+        <a-entity id="skin" position="1 1.5 -100" scale="2 2 2" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
         </a-entity>  
         <a-entity id="cell" position="1 5 -3" scale="7 7 7" visible="false" gltf-model="#h_cell" animation-mixer>
         </a-entity>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
 
-      <a-sphere id="part1" position="1 0 -3" radius="0.1" color="red">
-      <a-text value="1" position="0 0.2 0" scale="2 2 2" align="center"></a-text>
+      <a-sphere id="part1" position="1 0 -90" radius="0.1" color="red">
+      <a-text value="1" position="1 0 -90" scale="2 2 2" align="center"></a-text>
       </a-sphere>
     
       <!-- Black box with description -->
@@ -129,7 +129,7 @@
       <a-entity id="quizButton"
                 geometry="primitive: plane; height: 0.4; width: 1.5"
                 material="color: #28a745; opacity: 0.9"
-                position="-1.5 1.5 -3"
+                position="-1.5 1.5 -5"
                 text="value: Take the Quiz; align: center; color: white; width: 4"
                 visible="false"
                 class="clickable"
