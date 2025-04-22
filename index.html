@@ -69,7 +69,7 @@
   
         <a-entity id="intestine" class="organ" position="0 0 -2" visible="true">
           <a-entity gltf-model="#intestineModel" scale="0.09 0.09 0.09" animation-mixer></a-entity>
-          <a-entity text="value:Intestine; color: red; align: center;" position="0 0.1 0"></a-entity>
+          <a-entity text="value:Intestine; color: red; align: center;" position="-1 0 0"></a-entity>
           <a-entity id="line"
             line="start: 0 0 -2; end: -0.4 0 -2; color: red"
             position="0 0 0">
@@ -110,7 +110,7 @@
       <a-entity id="skin-cell-models" visible="false">
         <a-entity id="skin" position="1 0 -100" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
         </a-entity>  
-        <a-entity id="cell" position="1 5 -4" scale="10 10 10" visible="false" gltf-model="#h_cell" animation-mixer>
+        <a-entity id="cell" position="1 5 -3" scale="10 10 10" visible="false" gltf-model="#h_cell" animation-mixer>
         </a-entity>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
