@@ -191,6 +191,15 @@
       document.addEventListener("DOMContentLoaded", () => {
       const bodyModel = document.getElementById("anatomy");
       const organs = document.querySelectorAll(".organ");
+      const defaultPositions = {
+      heart: "0.5 0.4 -2",
+      brain: "0.5 0.6 -2",
+      lungs: "-0.5 0.3 -2",
+      intestine: "-0.5 0 -2",
+      liver: "-0.6 0.1 -2",
+      kidney: "0.7 0.09 -2",
+      stomach: "0.5 0.2 -2"
+    };
   
       // Narration for each organ
       const organNarration = {
@@ -204,36 +213,55 @@
       };
   
       organs.forEach((organ) => {
-        organ.addEventListener("click", () => {
-          // Hide body and other organs
-          bodyModel.setAttribute("visible", false);
-          organs.forEach((o) => {
-            if (o !== organ) o.setAttribute("visible", false);
-          });
-  
-          // Center the clicked organ
-          organ.setAttribute("position", "0 0 -1");
-          organ.setAttribute("visible", false);
+      organ.addEventListener("click", () => {
+        // Hide body with fade-out
+        bodyModel.setAttribute("animation__fadeout", {
+          property: "visible",
+          to: false,
+          dur: 200
+        });
+
+        // Hide other organs
+        organs.forEach((o) => {
+          if (o !== organ) {
+            o.setAttribute("animation__fadeout", {
+              property: "visible",
+              to: false,
+              dur: 200
+            });
+          }
+        });
+
+        // Move clicked organ to center smoothly
+        organ.setAttribute("animation__move", {
+          property: "position",
+          to: "0 0 -1",
+          dur: 500,
+          easing: "easeInOutQuad"
+        });
+
   
           // Speak organ description
           const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
           speech.lang = 'en-US';
           window.speechSynthesis.speak(speech);
   
-          // Reset after narration ends 
           speech.onend = () => {
-            bodyModel.setAttribute("visible", true);
-            organs.forEach((o) => {
-              o.setAttribute("visible", true);
-              // Reset position if needed (custom per organ)
-              if (o.id === "heart") o.setAttribute("position", "0.5 0.4 -2");
-              if (o.id === "brain") o.setAttribute("position", "0.5 0.6 -2");
-              if (o.id === "lungs") o.setAttribute("position", "-0.5 0.3 -2");
-              if (o.id === "intestine") o.setAttribute("position", "-0.5 0 -2");
-              if (o.id === "liver") o.setAttribute("position", "-0.6 0.1 -2");
-              if (o.id === "kidney") o.setAttribute("position", "0.7 0.09 -2");
-              if (o.id === "stomach") o.setAttribute("position", "0.5 0.2 -2");
+          // Move organ back to original position
+            organ.setAttribute("animation__return", {
+              property: "position",
+              to: defaultPositions[organ.id],
+              dur: 800,
+              easing: "easeInOutQuad"
             });
+  
+            // Fade body and other organs back in after a short delay
+            setTimeout(() => {
+              bodyModel.setAttribute("visible", true);
+              organs.forEach((o) => {
+                o.setAttribute("visible", true);
+              });
+            }, 800); // Wait for organ to finish returning
           };
         });
       });
