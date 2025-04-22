@@ -111,6 +111,11 @@
         <a-entity id="skin" position="1 1 -90" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear">
         </a-entity>  
         <a-entity id="cell" position="1 5 -3" scale="7 7 7" visible="false" gltf-model="#h_cell" animation-mixer>
+            <a-entity id="cell" text="value:Cell membrane; align: center; color: red" position="0.2 0 0"></a-entity>
+            <a-entity id="line"
+              line="start: 0 0.4 -2; end: 0.4 0.4 -2; color: red"
+              position="0 0 0">
+            </a-entity>
         </a-entity>
         <a-camera position="0 1.6 3" look-at="#cell"></a-camera>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
@@ -206,7 +211,8 @@
                 { id: "intestine", to: "-0.4 0 -2" },
                 { id: "liver", to: "-0.6 0.1 -2" },
                 { id: "kidney", to: "0.7 0.09 -2" },
-                { id: "stomach", to: "0.5 0.2 -2" }
+                { id: "stomach", to: "0.5 0.2 -2" },
+                { id: "cell", to: "-2 5 -3" }
               ];
   
               organs.forEach((organ, index) => {
