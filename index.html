@@ -215,39 +215,39 @@
         };
     
         organs.forEach((organ) => {
-        organ.addEventListener("click", () => {
-          // Hide body with fade-out
+          organ.addEventListener("click", () => {
+          // Fade out the body and other organs
           bodyModel.setAttribute("animation__fadeout", {
-            property: "visible",
-            to: false,
-            dur: 200
+            property: "material.opacity",
+            to: 0,
+            dur: 200,
+            easing: "easeInOutQuad"
           });
-  
-          // Hide other organs
+        
           organs.forEach((o) => {
             if (o !== organ) {
               o.setAttribute("animation__fadeout", {
-                property: "visible",
-                to: false,
-                dur: 200
+                property: "material.opacity",
+                to: 0,
+                dur: 200,
+                easing: "easeInOutQuad"
               });
             }
           });
-  
-          // Move clicked organ to center smoothly
+        
+          // Move clicked organ to the center
           organ.setAttribute("animation__move", {
             property: "position",
             to: "0 0 -1",
             dur: 500,
             easing: "easeInOutQuad"
           });
-  
+        
           // Speak organ description
           const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
           speech.lang = 'en-US';
           window.speechSynthesis.speak(speech);
-  
-          // When narration ends
+        
           speech.onend = () => {
             // Move organ back to original position
             organ.setAttribute("animation__return", {
@@ -256,18 +256,29 @@
               dur: 800,
               easing: "easeInOutQuad"
             });
-  
-            // Fade body and other organs back in after a short delay
+        
+            // Fade body and organs back in after a short delay
             setTimeout(() => {
-              bodyModel.setAttribute("visible", true);
+              // Fade-in the body and other organs
+              bodyModel.setAttribute("animation__fadein", {
+                property: "material.opacity",
+                to: 1,
+                dur: 200,
+                easing: "easeInOutQuad"
+              });
+              
               organs.forEach((o) => {
-                o.setAttribute("visible", true);
+                o.setAttribute("animation__fadein", {
+                  property: "material.opacity",
+                  to: 1,
+                  dur: 200,
+                  easing: "easeInOutQuad"
+                });
               });
             }, 800); // Wait for organ to finish returning
           };
         });
-      });
-    });        
+      });        
     
       function introSpeak(text, callback) {
       let utterance = new SpeechSynthesisUtterance(text);
