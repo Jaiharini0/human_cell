@@ -190,21 +190,21 @@
           }
         });
     
-          document.addEventListener("DOMContentLoaded", () => {
-          const bodyModel = document.getElementById("anatomy");
-          const organs = document.querySelectorAll(".organ");
-          const defaultPositions = {
-          heart: "0.5 0.4 -2",
-          brain: "0.5 0.6 -2",
-          lungs: "-0.5 0.3 -2",
-          intestine: "-0.5 0 -2",
-          liver: "-0.6 0.1 -2",
-          kidney: "0.7 0.09 -2",
-          stomach: "0.5 0.2 -2"
-          };
-      
-          // Narration for each organ
-          const organNarration = {
+        document.addEventListener("DOMContentLoaded", () => {
+        const bodyModel = document.getElementById("anatomy");
+        const organs = document.querySelectorAll(".organ");
+        const defaultPositions = {
+            heart: "0.5 0.4 -2",
+            brain: "0.5 0.6 -2",
+            lungs: "-0.5 0.3 -2",
+            intestine: "-0.5 0 -2",
+            liver: "-0.6 0.1 -2",
+            kidney: "0.7 0.09 -2",
+            stomach: "0.5 0.2 -2"
+        };
+    
+        // Narration for each organ
+        const organNarration = {
             heart: "This is the heart. It pumps blood to all parts of the body.",
             brain: "This is the brain. It controls thoughts, memory, and actions.",
             lungs: "These are the lungs. They help in breathing.",
@@ -212,74 +212,55 @@
             kidney: "These are the kidneys. They filter waste from the blood.",
             intestine: "This is the intestine. It absorbs nutrients from digested food.",
             stomach: "This is the stomach. It breaks down food with acids."
-          };
-      
-          organs.forEach((organ) => {
+        };
+    
+        organs.forEach((organ) => {
             organ.addEventListener("click", () => {
-            // Fade out the body and other organs
-            bodyModel.setAttribute("animation__fadeout", {
-              property: "material.opacity",
-              to: 0,
-              dur: 200,
-              easing: "easeInOutQuad"
-            });
-          
-            organs.forEach((o) => {
-              if (o !== organ) {
-                o.setAttribute("animation__fadeout", {
-                  property: "material.opacity",
-                  to: 0,
-                  dur: 200,
-                  easing: "easeInOutQuad"
-                });
-              }
-            });
-          
-            // Move clicked organ to the center
-            organ.setAttribute("animation__move", {
-              property: "position",
-              to: "0 0 -1",
-              dur: 500,
-              easing: "easeInOutQuad"
-            });
-          
-            // Speak organ description
-            const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
-            speech.lang = 'en-US';
-            window.speechSynthesis.speak(speech);
-          
-            speech.onend = () => {
-              // Move organ back to original position
-              organ.setAttribute("animation__return", {
-                property: "position",
-                to: defaultPositions[organ.id],
-                dur: 800,
-                easing: "easeInOutQuad"
-              });
-          
-              // Fade body and organs back in after a short delay
-              setTimeout(() => {
-                // Fade-in the body and other organs
-                bodyModel.setAttribute("animation__fadein", {
-                  property: "material.opacity",
-                  to: 1,
-                  dur: 200,
-                  easing: "easeInOutQuad"
-                });
-                
+                // Hide body with visibility toggle
+                bodyModel.setAttribute("visible", false);
+    
+                // Hide other organs
                 organs.forEach((o) => {
-                  o.setAttribute("animation__fadein", {
-                    property: "material.opacity",
-                    to: 1,
-                    dur: 200,
-                    easing: "easeInOutQuad"
-                  });
+                    if (o !== organ) {
+                        o.setAttribute("visible", false);
+                    }
                 });
-              }, 800); // Wait for organ to finish returning
-            };
-          });
-        });   
-      });
+    
+                // Move clicked organ to center smoothly
+                organ.setAttribute("animation__move", {
+                    property: "position",
+                    to: "0 0 -1",
+                    dur: 500,
+                    easing: "easeInOutQuad"
+                });
+    
+                // Speak organ description
+                const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
+                speech.lang = 'en-US';
+                window.speechSynthesis.speak(speech);
+    
+                // When narration ends
+                speech.onend = () => {
+                    // Move organ back to original position
+                    organ.setAttribute("animation__return", {
+                        property: "position",
+                        to: defaultPositions[organ.id],
+                        dur: 800,
+                        easing: "easeInOutQuad"
+                    });
+    
+                    // Fade body and other organs back in after a short delay
+                    setTimeout(() => {
+                        bodyModel.setAttribute("visible", true);
+                        organs.forEach((o) => {
+                            o.setAttribute("visible", true);
+                        });
+                    }, 800); // Wait for organ to finish returning
+                };
+            });
+        });
+    });
+
     
       function introSpeak(text, callback) {
       let utterance = new SpeechSynthesisUtterance(text);
