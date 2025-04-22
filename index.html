@@ -102,27 +102,18 @@
             position="0 0 0">
           </a-entity>
         </a-entity>
+        <button onclick="showSkinAndCell()" style="position: absolute; top: 20px; left: 20px; z-index: 999;">Show Skin & Cell</button>
 
       </a-entity>
 
       <!-- Skin Layers Model -->
-      <a-entity id="skin" 
-        position="1 0 -100" 
-        scale="1 1 1"
-        visible="false"
-        gltf-model="#h_skin"
-        animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+      <a-entity id="skin-cell-models" visible="false">
+        <a-entity id="skin" position="1 0 -100" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+        </a-entity>  
+        <a-entity id="cell" position="25 5 -150" scale="1 1 1" visible="false" gltf-model="#h_cell" animation-mixer>
+        </a-entity>
+        <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
       </a-entity>
-
-      <!-- Animal Cell Model -->
-      <a-entity id="cell" 
-        position="25 5 -150" 
-        scale="1 1 1"
-        visible="false"
-        gltf-model="#h_cell"
-        animation-mixer>
-      </a-entity>
-
       
       <!-- Quiz Button -->
       <a-entity id="quizButton"
@@ -153,6 +144,24 @@
   </div>
 
   <script>
+        function showSkinAndCell() {
+        // Hide anatomy and organs
+        document.getElementById("anatomy").setAttribute("visible", false);
+    
+        // Show skin and cell models
+        document.getElementById("skin-cell-models").setAttribute("visible", true);
+          // Show skin model first
+        const skinModel = document.getElementById("skin");
+        const cellModel = document.getElementById("cell");
+    
+        skinModel.setAttribute("visible", true);
+        cellModel.setAttribute("visible", false);
+    
+        // After delay, show cell model
+        setTimeout(() => {
+          cellModel.setAttribute("visible", true);
+        }, 3000); 
+      }
      AFRAME.registerComponent("organ-animations", {
         init: function () {
           setTimeout(() => {
@@ -258,19 +267,6 @@
                       // dur: 5000,
                       easing: "easeInOutQuad"
                     });
-                      
-                      h1.setAttribute("visible", "false");
-                      h2.setAttribute("visible", "true");
-      
-                      setTimeout(() => {
-                        h2.setAttribute("visible", "false");
-                        h3.setAttribute("visible", "true");
-      
-                        // Show quiz button after skin
-                        setTimeout(() => {
-                          document.querySelector("#quizButton").setAttribute("visible", "true");
-                        }, 3000);
-                      }, 5000); 
                   }, 10000);
           });
         }
