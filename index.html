@@ -216,6 +216,14 @@
     
         organs.forEach((organ) => {
             organ.addEventListener("click", () => {
+                // Move clicked organ to center smoothly
+                organ.setAttribute("animation__move", {
+                    property: "position",
+                    to: "0 0 -1",
+                    dur: 500,
+                    easing: "easeInOutQuad"
+                });
+              
                 // Hide body with visibility toggle
                 bodyModel.setAttribute("visible", false);
     
@@ -225,15 +233,7 @@
                         o.setAttribute("visible", false);
                     }
                 });
-    
-                // Move clicked organ to center smoothly
-                organ.setAttribute("animation__move", {
-                    property: "position",
-                    to: "0 0 -1",
-                    dur: 500,
-                    easing: "easeInOutQuad"
-                });
-    
+       
                 // Speak organ description
                 const speech = new SpeechSynthesisUtterance(organNarration[organ.id]);
                 speech.lang = 'en-US';
