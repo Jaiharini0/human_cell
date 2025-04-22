@@ -108,7 +108,7 @@
 
       <!-- Skin Layers Model -->
       <a-entity id="skin-cell-models" visible="false">
-        <a-entity id="skin" position="1 1 -90" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear">
+        <a-entity id="skin" position="1 1 -90" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear">
         </a-entity>  
         <a-entity id="cell" position="1 5 -3" scale="7 7 7" visible="false" gltf-model="#h_cell" animation-mixer>
         </a-entity>
@@ -173,13 +173,15 @@
         skinModel.setAttribute("visible", true);
         cellModel.setAttribute("visible", false);
         });
-    
+        
+        introSpeak("An animal cell is the basic unit of life in animals. It consists of various components such as the nucleus (containing DNA), mitochondria (energy production), cytoplasm (where chemical reactions occur), ribosomes (protein synthesis), and the cell membrane.", () => {
         // After delay, show cell model
         setTimeout(() => {
           skinModel.setAttribute("visible", false);
           document.querySelector("#quizButton").setAttribute("visible", "true");
           cellModel.setAttribute("visible", true);
-        }, 10000); 
+        }, 20000); 
+        });
       }
 
       function showAnatomy(){
