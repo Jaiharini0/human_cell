@@ -172,7 +172,7 @@
                 property: "position",
                 from: "0 0 0",
                 to: organ.to,
-                dur: 2000 + index * 200, // stagger the timing
+                dur: 3000 + index * 200, // stagger the timing
                 easing: "easeOutQuad"
               });
             });
@@ -248,7 +248,7 @@
           const h3 = document.querySelector("#cell");
           const camera = document.querySelector("#mainCamera");
 
-          introSpeak("Welcome to the amazing journey inside the human body!, Everything you see around you from your hands to your heart is made up of tiny living units called cells. These cells join together to form tissues, build organs, and create the marvelous machine that is YOU!", () => {
+          introSpeak("Welcome to the amazing journey inside the human body!", () => {
                 // Show quiz button after skin
                   h1.setAttribute("visible", "true");
                   setTimeout(() => {
