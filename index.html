@@ -160,6 +160,7 @@
     
         // After delay, show cell model
         setTimeout(() => {
+          skinModel.setAttribute("visible", false);
           document.querySelector("#quizButton").setAttribute("visible", "true");
           cellModel.setAttribute("visible", true);
         }, 3000); 
