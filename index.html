@@ -144,6 +144,20 @@
   </div>
 
   <script>
+    document.querySelectorAll("a-entity").forEach(el => {
+        el.addEventListener("model-loaded", () => {
+          const mesh = el.getObject3D("mesh");
+          if (mesh) {
+            mesh.traverse((node) => {
+              if (node.isMesh) {
+                node.material.transparent = true;
+                node.material.opacity = 1;
+              }
+            });
+          }
+        });
+      });
+
         function showSkinAndCell() {
         // Hide anatomy and organs
         document.getElementById("anatomy").setAttribute("visible", false);
