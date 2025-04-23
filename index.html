@@ -186,11 +186,6 @@
         // Show skin and cell models
         document.getElementById("skin-cell-models").setAttribute("visible", false);
       }
-
-      document.querySelector("#part1").addEventListener("click", function () {
-        const description = document.querySelector("#part1-description");
-        description.setAttribute("visible", true); // Show description
-      });
     
        AFRAME.registerComponent("organ-animations", {
           init: function () {
@@ -343,8 +338,6 @@
           document.getElementById('startAR').style.display = 'none';
           document.getElementById('arContainer').style.display = 'block';
           const h1 = document.querySelector("#anatomy");
-          const h2 = document.querySelector("#skin");
-          const h3 = document.querySelector("#cell");
           const camera = document.querySelector("#mainCamera");
 
           introSpeak("Welcome to the amazing journey inside the human body!", () => {
