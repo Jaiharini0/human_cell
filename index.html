@@ -111,7 +111,7 @@
         <a-entity id="skin" position="1 1 -90" scale="1 1 1" visible="false" gltf-model="#h_skin" animation="property: rotation; to: 0 360 0; loop: true; dur: 20000; easing: linear">
         </a-entity>  
         <a-entity id="cell" position="1 5 -3" scale="7 7 7" visible="false" gltf-model="#h_cell" animation-mixer>
-            <a-entity id="cell" text="value:Cell membrane; align: center; color: red" position="0.2 0 0"></a-entity>
+            <a-entity id="cell" text="value:Cell membrane; align: center; color: red" position="0 1 0"></a-entity>
             <a-entity id="line"
               line="start: 0 0.4 -2; end: 0.4 0.4 -2; color: red"
               position="0 0 0">
@@ -119,16 +119,6 @@
         </a-entity>
         <a-camera position="0 1.6 3" look-at="#cell"></a-camera>
         <button onclick="showAnatomy()" style="position: absolute; top: 60px; left: 20px; z-index: 999;">Back to Anatomy</button>
-      </a-entity>
-
-      <a-sphere id="part1" position="1 0 -90" radius="0.5" color="red" visible="false">
-      <a-text value="1" position="1 0 -90" scale="2 2 2" align="center"></a-text>
-      </a-sphere>
-    
-      <!-- Black box with description -->
-      <a-entity id="part1-description" position="0 2 -3" visible="false">
-        <a-plane width="3" height="1" color="black" position="0 0 0"></a-plane>
-        <a-text value="This is the Epidermis layer." color="white" scale="2 2 2" position="0 0 0" align="center"></a-text>
       </a-entity>
 
       <!-- Quiz Button For Cell-->
@@ -178,10 +168,11 @@
         
         introSpeak("The human body consists of various layers, including the skin, which is the body's largest organ. The skin has three primary layers: the epidermis (outer layer), dermis (middle layer), and hypodermis (deepest layer).", () => {
           skinModel.setAttribute("visible", false);
+          cellModel.setAttribute("visible", true);
         });
 
         
-        cellModel.setAttribute("visible", true);
+        
         introSpeak("An animal cell is the basic unit of life in animals. It consists of various components such as the nucleus (containing DNA), mitochondria (energy production), cytoplasm (where chemical reactions occur), ribosomes (protein synthesis), and the cell membrane.", () => {
         // After delay, show cell model
         setTimeout(() => {
